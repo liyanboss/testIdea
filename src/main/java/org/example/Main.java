@@ -10,15 +10,15 @@ public class Main {
 
         System.out.println("Hello and welcome!");
 
-        long fdfs = Math.round(10.4);
-        System.out.println(fdfs);
-        fdfs += 10;
-        System.out.println(fdfs);
+        long fdsfsaf = Math.round(10.4);
+        System.out.println(fdsfsaf);
+        fdsfsaf += 10;
+        System.out.println(fdsfsaf);
 
-        long hit2 = Math.round(10.4);
-        System.out.println(hit2);
-        hit2 += 10;
-        System.out.println(hit2);
+        long hhhfsdfwe3 = Math.round(10.4);
+        System.out.println(hhhfsdfwe3);
+        hhhfsdfwe3 += 10;
+        System.out.println(hhhfsdfwe3);
 
         //List
 
