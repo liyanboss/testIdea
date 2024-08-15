@@ -1,0 +1,88 @@
+[pmjuser01@localhost pkmj]$ pwd
+/pkmj
+[pmjuser01@localhost pkmj]$ ls -lh
+total 32K
+lrwxrwxrwx  1 pmjuser01 root   34 May 17 18:24 apache-tomcat-bo -> /pkmj/tools/apache-tomcat-9.0.8_BO
+lrwxrwxrwx  1 pmjuser01 root   34 May 17 18:23 apache-tomcat-hs -> /pkmj/tools/apache-tomcat-9.0.8_HS
+lrwxrwxrwx  1 pmjuser01 root   34 May 17 18:24 apache-tomcat-mt -> /pkmj/tools/apache-tomcat-9.0.8_MT
+drwxrwxrwx 11 pmjuser01 root 4.0K May 21 14:03 backoffice
+drwxrwxrwx  9 pmjuser01 root 4.0K May 21 14:03 gameserver
+drwxrwxrwx  9 pmjuser01 root 4.0K May 21 14:03 httpserver
+drwxrwxrwx  9 pmjuser01 root 4.0K May 21 14:03 lobbyserver
+-rwxrwxrwx  1 pmjuser01 root  539 May 21 13:55 switch_to_maintenance_mode.sh
+-rwxrwxrwx  1 pmjuser01 root  537 May 21 13:56 switch_to_running_mode.sh
+drwxrwxrwx  6 pmjuser01 root 4.0K May 17 18:22 tools
+drwxrwxrwx  2 pmjuser01 root 4.0K May 18 10:51 UAT
+[pmjuser01@localhost pkmj]$ cd tools/
+[pmjuser01@localhost tools]$ ls -lh
+total 247M
+-rw-r--r--  1 pmjuser01 root  56M May 14 16:15 apache-activemq-5.15.3-bin.tar.gz
+drwxr-xr-x  9 pmjuser01 root 4.0K May 17 18:20 apache-tomcat-9.0.8
+drwxr-xr-x 10 pmjuser01 root 4.0K May 21 12:29 apache-tomcat-9.0.8_BO
+drwxr-xr-x 10 pmjuser01 root 4.0K May 21 12:00 apache-tomcat-9.0.8_HS
+drwxr-xr-x 10 pmjuser01 root 4.0K May 21 12:40 apache-tomcat-9.0.8_MT
+-rw-r--r--  1 pmjuser01 root 9.4M May 10 16:39 apache-tomcat-9.0.8.tar.gz
+-rw-r--r--  1 pmjuser01 root 183M May 10 15:55 jdk-8u172-linux-x64.tar.gz
+[pmjuser01@localhost tools]$
+
+
+
+
+*Notes:
+[pmjuser01@localhost pkmj]$ ln -sv /pkmj/tools/apache-tomcat-9.0.8_HS /pkmj/apache-tomcat-hs
+`/pkmj/apache-tomcat-hs' -> `/pkmj/tools/apache-tomcat-9.0.8_HS'
+
+[pmjuser01@localhost pkmj]$ ln -sv /pkmj/tools/apache-tomcat-9.0.8_BO /pkmj/apache-tomcat-bo
+`/pkmj/apache-tomcat-bo' -> `/pkmj/tools/apache-tomcat-9.0.8_BO'
+
+[pmjuser01@localhost pkmj]$ ln -sv /pkmj/tools/apache-tomcat-9.0.8_MT /pkmj/apache-tomcat-mt
+`/pkmj/apache-tomcat-mt' -> `/pkmj/tools/apache-tomcat-9.0.8_MT'
+
+
+
+
+
+
+
+========================================================================================================================================================================
+[pmjuser01@UAT_PMJ_Web02 pkmj]$ pwd
+/pkmj
+[pmjuser01@UAT_PMJ_Web02 pkmj]$ ls -lh
+total 24K
+drwxrwxrwx 3 pmjuser01 pmjuser01 4.0K May 17 18:56 activemq
+drwxrwxrwx 9 pmjuser01 pmjuser01 4.0K May 21 14:03 airobot
+lrwxrwxrwx 1 pmjuser01 pmjuser01   34 May 17 18:28 apache-activemq -> /pkmj/tools/apache-activemq-5.15.3
+drwxrwxrwx 9 pmjuser01 pmjuser01 4.0K May 21 14:03 dataconsolidate
+drwxrwxrwx 9 pmjuser01 pmjuser01 4.0K May 21 14:03 gameserver
+drwxrwxrwx 3 pmjuser01 pmjuser01 4.0K May 18 12:22 tools
+drwxrwxrwx 2 pmjuser01 pmjuser01 4.0K May 18 11:47 UAT
+[pmjuser01@UAT_PMJ_Web02 pkmj]$ cd tools/
+[pmjuser01@UAT_PMJ_Web02 tools]$ ls -lh
+total 247M
+drwxr-xr-x 11 pmjuser01 pmjuser01 4.0K May 21 14:02 apache-activemq-5.15.3
+-rw-rw-r--  1 pmjuser01 pmjuser01  56M May 14 16:15 apache-activemq-5.15.3-bin.tar.gz
+-rw-rw-r--  1 pmjuser01 pmjuser01 9.4M May 10 16:39 apache-tomcat-9.0.8.tar.gz
+-rw-rw-r--  1 pmjuser01 pmjuser01 183M May 10 15:55 jdk-8u172-linux-x64.tar.gz
+[pmjuser01@UAT_PMJ_Web02 tools]$
+
+
+
+
+*Notes:
+[pmjuser01@UAT_PMJ_Web02 pkmj]$ ln -sv /pkmj/tools/apache-activemq-5.15.3 /pkmj/apache-activemq
+`/pkmj/apache-activemq' -> `/pkmj/tools/apache-activemq-5.15.3'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

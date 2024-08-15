@@ -1,0 +1,38 @@
+option batch on
+option confirm off
+open %1%
+option transfer binary
+
+get /pkmj/lobbyserver/scripts/backup.sh %2%\CASH_LobbyServer\pkmj\lobbyserver\scripts\
+get /pkmj/lobbyserver/scripts/deploy.sh %2%\CASH_LobbyServer\pkmj\lobbyserver\scripts\
+get /pkmj/lobbyserver/scripts/shutdown.sh %2%\CASH_LobbyServer\pkmj\lobbyserver\scripts\
+get /pkmj/lobbyserver/scripts/startup.sh %2%\CASH_LobbyServer\pkmj\lobbyserver\scripts\
+
+get /pkmj/lobbyserver/jdbc.properties %2%\CASH_LobbyServer\pkmj\lobbyserver\
+get /pkmj/lobbyserver/lobby_server.properties %2%\CASH_LobbyServer\pkmj\lobbyserver\
+get /pkmj/lobbyserver/logback.xml %2%\CASH_LobbyServer\pkmj\lobbyserver\
+
+get /pkmj/lobbyserver/running %2%\CASH_LobbyServer\pkmj\lobbyserver\
+get /pkmj/tools/apache-activemq-5.15.3-bin.tar.gz %2%\CASH_LobbyServer\pkmj\tools\
+
+
+get /pkmj/activemq_61616/scripts/backup.sh %2%\CASH_LobbyServer\pkmj\activemq_61616\scripts\
+get /pkmj/activemq_61616/scripts/monitor_amq.sh %2%\CASH_LobbyServer\pkmj\activemq_61616\scripts\
+get /pkmj/activemq_61616/scripts/restart_amq.sh %2%\CASH_LobbyServer\pkmj\activemq_61616\scripts\
+get /pkmj/activemq_61616/scripts/shutdown.sh %2%\CASH_LobbyServer\pkmj\activemq_61616\scripts\
+get /pkmj/activemq_61616/scripts/startup.sh %2%\CASH_LobbyServer\pkmj\activemq_61616\scripts\
+
+get /pkmj/tools/apache-activemq-5.15.3_61616/bin/env %2%\CASH_LobbyServer\pkmj\tools\apache-activemq-5.15.3_61616\bin\
+get /pkmj/tools/apache-activemq-5.15.3_61616/conf/activemq.xml %2%\CASH_LobbyServer\pkmj\tools\apache-activemq-5.15.3_61616\conf\
+
+get /pkmj/activemq_61626/scripts/backup.sh %2%\CASH_LobbyServer\pkmj\activemq_61626\scripts\
+get /pkmj/activemq_61626/scripts/monitor_amq.sh %2%\CASH_LobbyServer\pkmj\activemq_61626\scripts\
+get /pkmj/activemq_61626/scripts/restart_amq.sh %2%\CASH_LobbyServer\pkmj\activemq_61626\scripts\
+get /pkmj/activemq_61626/scripts/shutdown.sh %2%\CASH_LobbyServer\pkmj\activemq_61626\scripts\
+get /pkmj/activemq_61626/scripts/startup.sh %2%\CASH_LobbyServer\pkmj\activemq_61626\scripts\
+
+get /pkmj/tools/apache-activemq-5.15.3_61626/bin/env %2%\CASH_LobbyServer\pkmj\tools\apache-activemq-5.15.3_61626\bin\
+get /pkmj/tools/apache-activemq-5.15.3_61626/conf/activemq.xml %2%\CASH_LobbyServer\pkmj\tools\apache-activemq-5.15.3_61626\conf\
+
+close
+exit

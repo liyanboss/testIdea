@@ -1,0 +1,14 @@
+1, tomcat change: the catalina.sh file, add one line blow:
+JAVA_OPTS="-Djava.awt.headless=true -Dawt.toolkit=sun.awt.HToolkit"
+or add it to setenv.sh
+export JAVA_OPTS="-server -Xms3G -Xmx3G -Djava.awt.headless=true -Dawt.toolkit=sun.awt.HToolkit"
+export JAVA_OPTS_EXT="-Djava.awt.headless=true -Dawt.toolkit=sun.awt.HToolkit"
+
+2, change cas\WEB-INF\classes\jdbc.properties
+master.host=master-db.pkmj.com
+slave.host=slave-db.pkmj.com
+
+3, open walletbo\WEB-INF\lib\common-1.0.jar, change jdbc.properties inside
+master.host=master-db.pkmj.com
+slave.host=slave-db.pkmj.com
+

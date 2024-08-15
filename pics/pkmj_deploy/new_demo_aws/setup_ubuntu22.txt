@@ -1,0 +1,194 @@
+Memory: 16G
+Disk: 80G
+CPU: 4 Cores
+System: Ubuntu 22 also fine 
+URL: p2p.demo-gameshub.com
+
+ssh -i d:/aaaaa.pem lee@i-050e1bcc09722221c
+ssh -i D:\PKMJ\ProductPMahjongServer\dbAutomation\pkmj_deploy\ppk\aaaaa.pem lee@i-050e1bcc09722221c
+scp -i d:/aaaaa.pem d:/xx.txt lee@i-050e1bcc09722221c:/home/lee
+scp -i d:/aaaaa.pem D:\PKMJ\Setup\apache-activemq-5.15.3-bin.tar.gz lee@i-050e1bcc09722221c:/pkmj/tools
+
+Welcome to Ubuntu 22.04.4 LTS (GNU/Linux 6.2.0-1017-aws x86_64) [172.20.137.177]
+Last login: Sat Feb 24 06:48:28 2024 from 127.0.0.1
+lee@ip-172-20-137-177:~$
+
+sudo apt list --installed | grep curl
+sudo apt list --installed | grep tar
+sudo apt list --installed | grep telnet
+sudo apt list --installed | grep netstat
+sudo apt list --installed | grep unzip
+sudo apt list --installed | grep nginx
+sudo apt list --installed | grep java
+sudo apt list --installed | grep mysql
+sudo apt list --installed | grep mariadb-server
+
+sudo apt search netstat
+sudo apt search unzip
+sudo apt search nginx
+sudo apt search mariadb-server
+
+sudo apt install net-tools
+sudo apt install unzip
+sudo apt install nginx
+sudo apt install mariadb-server
+
+1,change Ubuntu22 timezone
+ls -l /etc/localtime
+sudo rm -rf /etc/localtime
+sudo ln -s /usr/share/zoneinfo/Singapore /etc/localtime
+
+2,install nginx in Ubuntu22
+cat /etc/os-release
+https://nginx.org/en/linux_packages.html
+sudo apt install nginx
+sudo netstat -tulpn | grep nginx
+sudo systemctl start nginx
+curl -v http://127.0.0.1/
+curl -v http://172.20.137.177/
+curl -v http://p2papi.demo-gameshub.com/
+curl -v http://104.21.42.211/
+sudo systemctl status nginx
+sudo /usr/sbin/nginx -s reload
+sudo /usr/sbin/nginx -s stop
+sudo systemctl stop nginx
+
+3,install java 8 with Alternatives
+cd /pkmj/tools/
+tar zxvf jdk-8u172-linux-x64.tar.gz
+sudo mv jdk1.8.0_172/ /opt/
+cd /opt/jdk1.8.0_172/
+sudo update-alternatives --install /usr/bin/java java /opt/jdk1.8.0_172/bin/java 180172
+sudo update-alternatives --config java
+java -version
+
+4,install tomcat and activemq
+cd /pkmj/tools/
+tar zxvf apache-tomcat-9.0.34.tar.gz
+mv apache-tomcat-9.0.34 apache-tomcat-9.0.34_HttpServer
+ln -sv /pkmj/tools/apache-tomcat-9.0.34_HttpServer /pkmj/apache-tomcat-HttpServer
+tar zxvf apache-tomcat-9.0.34.tar.gz
+mv apache-tomcat-9.0.34 apache-tomcat-9.0.34_BackOffice
+ln -sv /pkmj/tools/apache-tomcat-9.0.34_BackOffice /pkmj/apache-tomcat-BackOffice
+tar zxvf apache-tomcat-9.0.34.tar.gz
+mv apache-tomcat-9.0.34 apache-tomcat-9.0.34_NewBackOffice
+ln -sv /pkmj/tools/apache-tomcat-9.0.34_NewBackOffice /pkmj/apache-tomcat-NewBackOffice
+cd /pkmj/tools/
+tar zxvf apache-activemq-5.15.3-bin.tar.gz
+mv apache-activemq-5.15.3 apache-activemq-5.15.3_61616
+ln -sv /pkmj/tools/apache-activemq-5.15.3_61616 /pkmj/activemq_61616/apache-activemq
+tar zxvf apache-activemq-5.15.3-bin.tar.gz
+mv apache-activemq-5.15.3 apache-activemq-5.15.3_61626
+ln -sv /pkmj/tools/apache-activemq-5.15.3_61626 /pkmj/activemq_61626/apache-activemq
+
+5,add the hosts mapping, add task to crontab
+sudo less /etc/hosts
+# PKMJ
+172.20.137.177     master-db.pkmj.com
+172.20.137.177     slave-db.pkmj.com
+172.20.137.177     amq.pkmj.com
+172.20.137.177     p2p-wallet.pkmj.com
+# PKMJ
+172.20.137.177     club8api.w88uat.com
+# MOCK
+172.20.137.177     mock-auth.pkmj.com
+172.20.137.177     mock-wallet.pkmj.com
+# MOCK
+# UAT override
+#172.20.137.177     integration.aqzbouatv2.com
+#172.20.137.177     api.w88uatv2.com
+sudo cat /etc/crontab
+#01 00 * * * root /pkmj/nginxserver/scripts/backup_nginx_log.sh
+
+7,install mariadb server
+sudo netstat -tulpn | grep 3306
+sudo apt install mariadb-server
+sudo systemctl start mariadb.service
+sudo mysql_secure_installation
+(mysql root pass is: root)
+mysql --host=127.0.0.1 --user=root --password=root --database=mysql
+SHOW VARIABLES LIKE 'char%';
+SHOW VARIABLES LIKE 'coll%';
+
+8,enable MariaDB to start on boot and start the service [maybe need it]
+sudo systemctl enable mariadb
+sudo systemctl start mariadb
+To verify the installation check the MariaDB service status by typing:
+sudo systemctl status mariadb
+
+9,create pokermahjong database and mysql user
+CREATE DATABASE pokermahjong DEFAULT CHARACTER SET = utf8 DEFAULT COLLATE = utf8_unicode_ci;
+#grant all privileges on *.* to 'test_user_123'@'%' identified by 'Test_Pass_123';
+#flush privileges;
+mysql --host=127.0.0.1 --user=test_user_123 --password=Test_Pass_123 --database=pokermahjong
+
+10,open port for outside access [maybe need it]
+sudo netstat -tulpn | grep 3306
+sudo firewall-cmd --add-port=3306/tcp;
+sudo firewall-cmd --remove-port=3306/tcp;
+sudo firewall-cmd  --reload;
+sudo firewall-cmd --list-all
+
+11,upload files to server
+scp -i d:/aaaaa.pem D:\PKMJ\Setup\apache-activemq-5.15.3-bin.tar.gz lee@i-050e1bcc09722221c:/pkmj/tools
+scp -i d:/aaaaa.pem D:\PKMJ\ProductPMahjongServer\dbAutomation\pkmj_deploy\new_aws\pkmj\nginxserver\root_maintenance\* lee@i-050e1bcc09722221c:/pkmj/nginxserver/root_maintenance
+
+pscp -P 22 -i D:\PKMJ\ProductPMahjongServer\dbAutomation\pkmj_deploy\ppk\52.79.103.161.ppk -r centos@52.79.103.161:/pkmj/nginxserver/scripts/* D:\sql\
+scp -i d:/aaaaa.pem D:\sql\* lee@i-050e1bcc09722221c:/pkmj/nginxserver/scripts/
+
+pscp -P 22 -i D:\PKMJ\ProductPMahjongServer\dbAutomation\pkmj_deploy\ppk\52.79.103.161.ppk -r centos@52.79.103.161:/pkmj/activemq_61616/scripts/* D:\sql\
+scp -i d:/aaaaa.pem D:\sql\* lee@i-050e1bcc09722221c:/pkmj/activemq_61616/scripts/
+
+pscp -P 22 -i D:\PKMJ\ProductPMahjongServer\dbAutomation\pkmj_deploy\ppk\52.79.103.161.ppk -r centos@52.79.103.161:/pkmj/activemq_61626/scripts/* D:\sql\
+scp -i d:/aaaaa.pem D:\sql\* lee@i-050e1bcc09722221c:/pkmj/activemq_61626/scripts/
+
+pscp -P 22 -i D:\PKMJ\ProductPMahjongServer\dbAutomation\pkmj_deploy\ppk\52.79.103.161.ppk -r centos@52.79.103.161:/pkmj/airobot_bcmn/logback.xml D:\sql\
+scp -i d:/aaaaa.pem D:\sql\* lee@i-050e1bcc09722221c:/pkmj/airobot_bcmn/
+
+pscp -P 22 -i D:\PKMJ\ProductPMahjongServer\dbAutomation\pkmj_deploy\ppk\52.79.103.161.ppk -r centos@52.79.103.161:/pkmj/AWS/* D:\sql\
+scp -P 22 -i d:/aaaaa.pem D:\sql\* lee@i-050e1bcc09722221c:/pkmj/DEMO/
+
+pscp -P 22 -i D:\PKMJ\ProductPMahjongServer\dbAutomation\pkmj_deploy\ppk\52.79.103.161.ppk -r centos@52.79.103.161:/pkmj/airobot_fish/scripts/* D:\sql\
+scp -i d:/aaaaa.pem D:\sql\* lee@i-050e1bcc09722221c:/pkmj/airobot_fish/scripts/
+
+pscp -P 22 -i D:\PKMJ\ProductPMahjongServer\dbAutomation\pkmj_deploy\ppk\52.79.103.161.ppk -r centos@52.79.103.161:/pkmj/apache-tomcat-HttpServer/webapps/ROOT/* D:\sql\
+scp -i d:/aaaaa.pem D:\sql\* lee@i-050e1bcc09722221c:/pkmj/apache-tomcat-HttpServer/webapps/ROOT/
+
+pscp -P 22 -i D:\PKMJ\ProductPMahjongServer\dbAutomation\pkmj_deploy\ppk\52.79.103.161.ppk -r centos@52.79.103.161:/pkmj/dataconsolidate/scripts/* D:\sql\
+scp -i d:/aaaaa.pem D:\sql\* lee@i-050e1bcc09722221c:/pkmj/dataconsolidate/scripts/
+
+pscp -P 22 -i D:\PKMJ\ProductPMahjongServer\dbAutomation\pkmj_deploy\ppk\52.79.103.161.ppk -r centos@52.79.103.161:/pkmj/backoffice/scripts/* D:\sql\
+scp -i d:/aaaaa.pem D:\sql\* lee@i-050e1bcc09722221c:/pkmj/backoffice/scripts/
+
+pscp -P 22 -i D:\PKMJ\ProductPMahjongServer\dbAutomation\pkmj_deploy\ppk\52.79.103.161.ppk -r centos@52.79.103.161:/pkmj/lobbyserver/scripts/* D:\sql\
+scp -i d:/aaaaa.pem D:\sql\* lee@i-050e1bcc09722221c:/pkmj/lobbyserver/scripts/
+
+pscp -P 22 -i D:\PKMJ\ProductPMahjongServer\dbAutomation\pkmj_deploy\ppk\52.79.103.161.ppk -r centos@52.79.103.161:/pkmj/gameserver/scripts/* D:\sql\
+scp -i d:/aaaaa.pem D:\sql\* lee@i-050e1bcc09722221c:/pkmj/gameserver/scripts/
+
+pscp -P 22 -i D:\PKMJ\ProductPMahjongServer\dbAutomation\pkmj_deploy\ppk\52.79.103.161.ppk -r centos@52.79.103.161:/pkmj/httpserver/scripts/* D:\sql\
+scp -i d:/aaaaa.pem D:\sql\* lee@i-050e1bcc09722221c:/pkmj/httpserver/scripts/
+
+command-upload-folder:
+scp -i d:/aaaaa.pem -r D:\PKMJ\ProductPMahjongServer\pokermahjongstub\target\pokermahjongstub lee@i-050e1bcc09722221c:/pkmj/apache-tomcat-HttpServer/webapps/
+scp -i d:/aaaaa.pem -r D:\PKMJ\ROOT\_commons lee@i-050e1bcc09722221c:/pokermahjong/webapps/ROOT/
+scp -i d:/aaaaa.pem -r D:\PKMJ\ROOT\html5PokerMahjong2 lee@i-050e1bcc09722221c:/pokermahjong/webapps/ROOT/
+scp -i d:/aaaaa.pem D:\sql\web.xml lee@i-050e1bcc09722221c:/pkmj/apache-tomcat-HttpServer/conf/
+command-download-folder:
+scp -i d:/aaaaa.pem -r lee@i-050e1bcc09722221c:/pkmj/xxx/nginx-1.24.0 D:\sql
+scp -i d:/aaaaa.pem -r lee@i-050e1bcc09722221c:/pkmj/apache-tomcat-HttpServer/conf/web.xml D:\sql
+
+
+12,generate sql files
+CREATE DATABASE pokermahjong_240226 DEFAULT CHARACTER SET = utf8 DEFAULT COLLATE = utf8_unicode_ci;
+mysqldump -h127.0.0.1 -uroot -proot pokermahjong_240226 -R > d:\sql\pokermahjong_240226.sql
+scp -i d:/aaaaa.pem D:\sql\* lee@i-050e1bcc09722221c:/pkmj/tools/
+SELECT db,name,type,definer,character_set_client,collation_connection,db_collation FROM mysql.proc;
+
+
+lee@ip-172-20-137-177:/pkmj$ netstat -tulpn | grep 3306
+Command 'netstat' not found, but can be installed with:
+sudo apt install net-tools
+lee@ip-172-20-137-177:/pkmj$
+
+

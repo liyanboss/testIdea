@@ -1,0 +1,18 @@
+option batch on
+option confirm off
+open %1%
+option transfer binary
+
+get /pkmj/gameserver/scripts/backup.sh %2%\CASH_GameServer\pkmj\gameserver\scripts\
+get /pkmj/gameserver/scripts/deploy.sh %2%\CASH_GameServer\pkmj\gameserver\scripts\
+get /pkmj/gameserver/scripts/shutdown.sh %2%\CASH_GameServer\pkmj\gameserver\scripts\
+get /pkmj/gameserver/scripts/startup.sh %2%\CASH_GameServer\pkmj\gameserver\scripts\
+
+get /pkmj/gameserver/jdbc.properties %2%\CASH_GameServer\pkmj\gameserver\
+get /pkmj/gameserver/game_server.properties %2%\CASH_GameServer\pkmj\gameserver\
+get /pkmj/gameserver/logback.xml %2%\CASH_GameServer\pkmj\gameserver\
+
+get /pkmj/gameserver/running %2%\CASH_GameServer\pkmj\gameserver\
+
+close
+exit

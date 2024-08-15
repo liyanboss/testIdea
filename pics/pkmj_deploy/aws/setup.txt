@@ -1,0 +1,36 @@
+1,run dbAutomation, get latest database
+mysqldump -uroot -p pokermahjong -n -d > d:\pkmj_table_schema.sql
+mysqldump -uroot -p pokermahjong -n -t > d:\pkmj_init_data.sql
+mysqldump -uroot -p pokermahjong -n -d -t -R > d:\pkmj_routines.sql
+2,install java 8 with Alternatives
+cd /pkmj/tools/
+tar zxvf jdk-8u172-linux-x64.tar.gz
+sudo mv jdk1.8.0_172/ /opt/
+cd /opt/jdk1.8.0_172/
+sudo alternatives --install /usr/bin/java java /opt/jdk1.8.0_172/bin/java 180172
+sudo alternatives --config java
+3,install nginx
+cat /etc/issue
+https://nginx.org/en/linux_packages.html#stable
+sudo yum list installed | grep java
+sudo yum remove java-1.5.0-gcj.x86_64
+sudo yum search nginx
+sudo yum install nginx.x86_64
+4,install tomcat and activemq
+tar zxvf apache-tomcat-9.0.8.tar.gz
+ln -sv /pkmj/tools/apache-tomcat-9.0.8_HS /pkmj/apache-tomcat-hs
+ln -sv /pkmj/tools/apache-tomcat-9.0.8_BO /pkmj/apache-tomcat-bo
+tar zxvf apache-activemq-5.15.3-bin.tar.gz
+ln -sv /pkmj/tools/apache-activemq-5.15.3 /pkmj/apache-activemq
+5,add the hosts mapping
+sudo less /etc/hosts
+192.168.34.66     master-db.pkmj.com
+192.168.34.66     slave-db.pkmj.com
+192.168.34.30     amq.pkmj.com
+192.168.34.21     p2p-wallet.pkmj.com
+192.168.34.21     club8api.w88uat.com
+
+
+6,/etc/supervisor.d/*.conf, to change each config file.
+sudo supervisorctl update
+sudo supervisorctl start lobbyserver

@@ -1,0 +1,26 @@
+SHELL=/bin/bash
+PATH=/sbin:/bin:/usr/sbin:/usr/bin
+MAILTO=root
+
+
+* * * * * root /pkmj/activemq_61616/scripts/monitor_amq.sh >> /pkmj/activemq_61616/scripts/monitor_amq.log 2>&1
+* * * * * root /pkmj/activemq_61626/scripts/monitor_amq.sh >> /pkmj/activemq_61626/scripts/monitor_amq.log 2>&1
+0 15 * * 5 root /pkmj/activemq_61626/scripts/restart_amq.sh >> /pkmj/activemq_61626/scripts/restart_amq.log 2>&1
+
+
+# config for UAT only
+10 20 * * * root /pkmj/UAT/bots_shutdown_1by1.sh
+20 20 * * * root /pkmj/UAT/bots_startup_1by1.sh
+* * * * * root /pkmj/gameserver/scripts/monitor_GS.sh >> /pkmj/gameserver/scripts/monitor_GS.log 2>&1
+
+
+# For details see man 4 crontabs
+
+# Example of job definition:
+# .---------------- minute (0 - 59)
+# |  .------------- hour (0 - 23)
+# |  |  .---------- day of month (1 - 31)
+# |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ...
+# |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat
+# |  |  |  |  |
+# *  *  *  *  * user-name  command to be executed

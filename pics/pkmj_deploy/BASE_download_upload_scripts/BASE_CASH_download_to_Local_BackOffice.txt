@@ -1,0 +1,31 @@
+option batch on
+option confirm off
+open %1%
+option transfer binary
+
+get /pkmj/backoffice/scripts/backup.sh %2%\CASH_BackOffice\pkmj\backoffice\scripts\
+get /pkmj/backoffice/scripts/deploy.sh %2%\CASH_BackOffice\pkmj\backoffice\scripts\
+get /pkmj/backoffice/scripts/monitor_BO.sh %2%\CASH_BackOffice\pkmj\backoffice\scripts\
+get /pkmj/backoffice/scripts/restart_BO.sh %2%\CASH_BackOffice\pkmj\backoffice\scripts\
+get /pkmj/backoffice/scripts/shutdown.sh %2%\CASH_BackOffice\pkmj\backoffice\scripts\
+get /pkmj/backoffice/scripts/startup.sh %2%\CASH_BackOffice\pkmj\backoffice\scripts\
+
+get /pkmj/backoffice/backoffice_mailer.properties %2%\CASH_BackOffice\pkmj\backoffice\
+get /pkmj/backoffice/jdbc.properties %2%\CASH_BackOffice\pkmj\backoffice\
+get /pkmj/backoffice/logbackConfig.xml %2%\CASH_BackOffice\pkmj\backoffice\
+
+get /pkmj/tools/apache-tomcat-9.0.34.tar.gz %2%\CASH_BackOffice\pkmj\tools\
+
+get /pkmj/tools/apache-tomcat-9.0.34_BackOffice/bin/setenv.sh %2%\CASH_BackOffice\pkmj\tools\apache-tomcat-9.0.34_BackOffice\bin\
+get /pkmj/tools/apache-tomcat-9.0.34_BackOffice/conf/server.xml %2%\CASH_BackOffice\pkmj\tools\apache-tomcat-9.0.34_BackOffice\conf\
+get /pkmj/tools/apache-tomcat-9.0.34_BackOffice/conf/web.xml %2%\CASH_BackOffice\pkmj\tools\apache-tomcat-9.0.34_BackOffice\conf\
+
+get /pkmj/tools/apache-tomcat-9.0.34_BackOffice/webapps %2%\CASH_BackOffice\pkmj\tools\apache-tomcat-9.0.34_BackOffice\
+
+
+get /etc/nginx/nginx.conf %2%\CASH_BackOffice\etc\nginx\
+get /etc/nginx/conf.d/default.conf %2%\CASH_BackOffice\etc\nginx\conf.d\
+
+
+close
+exit

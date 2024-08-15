@@ -1,0 +1,17 @@
+127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
+::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+
+
+# PROD
+10.1.88.156       master-db.pkmj.com
+10.1.88.158       slave-db.pkmj.com
+192.168.77.84     amq.pkmj.com
+# PROD
+
+
+10.1.88.156      walletMaster
+10.1.88.158      walletSlave
+
+
+
+

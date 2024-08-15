@@ -1,0 +1,50 @@
+
+sudo yum list installed | grep curl
+sudo yum list installed | grep telnet
+sudo yum list installed | grep tar
+sudo yum list installed | grep unzip
+sudo yum list installed | grep nginx
+sudo yum list installed | grep java
+sudo yum list installed | grep mysql
+sudo yum list installed | grep mariadb
+
+
+sudo yum list search telnet
+sudo yum list search mariadb
+
+sudo yum install telnet.x86_64
+sudo yum install unzip.x86_64
+sudo yum install mariadb.x86_64
+sudo yum install nginx.x86_64
+
+
+pscp -P 22 -pw PASSWD -r pmjuser01@192.168.34.29:/pokermahjong/apache-tomcat-8.0.14/webapps/ROOT/P2PGame1 D:\PKMJ\ROOT
+
+pscp -P 22 -pw PASSWD -r D:\PKMJ\ProductPMahjongServer\dbAutomation\pkmj_deploy\new_uat\uat_86_29\pkmj pmjuser01@192.168.34.27:/home/pmjuser01/upload/
+pscp -P 22 -pw PASSWD -r D:\PKMJ\ProductPMahjongServer\dbAutomation\pkmj_deploy\new_uat\uat_86_29\pokermahjong pmjuser01@192.168.34.27:/home/pmjuser01/upload/
+
+pscp -P 22 -pw PASSWD -r D:\PKMJ\ProductPMahjongServer\dbAutomation\pkmj_deploy\new_uat\uat_86_30\pkmj pmjuser01@192.168.34.28:/home/pmjuser01/upload/
+
+
+
+pscp -P 22 -pw PASSWD -r D:\PKMJ\PM_X\ProductPMahjongServer\BackOffice\target\ROOT\WEB-INF\lib\* pmjuser01@192.168.34.27:/pkmj/backoffice/lib/
+pscp -P 22 -pw PASSWD -r D:\PKMJ\PM_X\ProductPMahjongServer\HttpServer\target\HttpServer\WEB-INF\lib\* pmjuser01@192.168.34.27:/pkmj/httpserver/lib/
+pscp -P 22 -pw PASSWD -r D:\PKMJ\PM_X\ProductPMahjongServer\NewBackOffice\target\NewBackOffice\WEB-INF\lib\* pmjuser01@192.168.34.27:/pkmj/newbackoffice/lib/
+
+pscp -P 22 -pw PASSWD -r pmjuser01@192.168.34.29:/pokermahjong/apache-tomcat-8.0.14/webapps/AngularBackOffice D:\PKMJ\ROOT
+pscp -P 22 -pw PASSWD -r D:\PKMJ\ROOT\AngularBackOffice\* pmjuser01@192.168.34.27:/pokermahjong/webapps/AngularBackOffice/
+
+pscp -P 22 -pw PASSWD -r pmjuser01@192.168.34.29:/pkmj/tools/apache-tomcat-9.0.34_HttpServer/webapps/pokermahjongstub D:\PKMJ\ROOT
+pscp -P 22 -pw PASSWD -r D:\PKMJ\ROOT\pokermahjongstub\* pmjuser01@192.168.34.27://pkmj/tools/apache-tomcat-9.0.34_HttpServer/webapps/pokermahjongstub/
+
+pscp -P 22 -pw PASSWD -r pmjuser01@192.168.34.29:/pkmj/tools/apache-tomcat-9.0.34_NewBackOffice/webapps/ROOT/* D:\PKMJ\ROOT\NBO_ROOT\
+pscp -P 22 -pw PASSWD -r D:\PKMJ\ROOT\NBO_ROOT\* pmjuser01@192.168.34.27:/pkmj/tools/apache-tomcat-9.0.34_NewBackOffice/webapps/ROOT/
+
+
+
+tar zxvf apache-tomcat-9.0.34.tar.gz
+mv apache-tomcat-9.0.34 apache-tomcat-9.0.34_NewBackOffice
+ln -sv /pkmj/tools/apache-tomcat-9.0.34_NewBackOffice /pkmj/apache-tomcat-NewBackOffice
+
+
+

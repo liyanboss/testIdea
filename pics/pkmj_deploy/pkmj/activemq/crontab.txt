@@ -1,0 +1,20 @@
+
+sudo less /etc/crontab
+
+
+
+* * * * * root /pkmj/activemq/scripts/monitor_amq.sh >> /pkmj/activemq/scripts/monitor_amq.log 2>&1
+0 15 * * 5 root /pkmj/activemq/scripts/restart_amq.sh >> /pkmj/activemq/scripts/restart_amq.log 2>&1
+
+
+
+
+sudo less /etc/sudoers
+
+#
+# Disable "ssh hostname sudo <cmd>", because it will show the password in clear.
+#         You have to run "ssh -t hostname sudo <cmd>".
+#
+#Defaults    requiretty
+
+

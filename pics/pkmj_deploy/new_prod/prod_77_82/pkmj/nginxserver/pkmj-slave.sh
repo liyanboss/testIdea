@@ -1,0 +1,1 @@
+mysql --host=10.1.88.158 --user=test --password=test --database=pokermahjong

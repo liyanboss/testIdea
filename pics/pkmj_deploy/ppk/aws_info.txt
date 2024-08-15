@@ -1,0 +1,51 @@
+https://www.clickittech.com/aws/connect-ec2-instance-using-ssh/
+
+How to connect to an EC2 instance using SSH using Windows
+putty login. using centos
+
+
+centos 7
+52.79.103.161
+login: root (with pem key)
+putty login: centos
+
+ssh -i /path/my-key-pair.pem my-instance-user-name@my-instance-public-dns-name
+ssh -i /your_key.pem root@52.79.103.161
+
+ssh -i D:/_GPIFish_CentOS.pem root@52.79.103.161
+
+
+
+
+This EC2 instance specs:
+
+[centos@ip-172-31-30-200 /]$ free -h
+              total        used        free      shared  buff/cache   available
+Mem:            15G        4.9G        1.2G        848M        9.4G        9.4G
+Swap:            0B          0B  
+
+[centos@ip-172-31-30-200 /]$ df -lh
+Filesystem      Size  Used Avail Use% Mounted on
+devtmpfs        7.8G     0  7.8G   0% /dev
+tmpfs           7.8G     0  7.8G   0% /dev/shm
+tmpfs           7.8G  849M  7.0G  11% /run
+tmpfs           7.8G     0  7.8G   0% /sys/fs/cgroup
+/dev/xvda1       80G  8.9G   72G  12% /
+tmpfs           1.6G     0  1.6G   0% /run/user/1000
+
+[centos@ip-172-31-30-200 /]$ top
+top - 11:46:26 up 757 days, 18:44,  2 users,  load average: 0.00, 0.01, 0.05
+Tasks: 124 total,   2 running, 122 sleeping,   0 stopped,   0 zombie
+%Cpu0  :  1.2 us,  0.0 sy,  0.0 ni, 98.8 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+%Cpu1  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+%Cpu2  :  0.0 us,  1.2 sy,  0.0 ni, 98.8 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+%Cpu3  :  0.0 us,  0.0 sy,  0.0 ni, 98.8 id,  0.0 wa,  0.0 hi,  0.0 si,  1.2 st
+KiB Mem : 16265024 total,  1229356 free,  5187592 used,  9848076 buff/cache
+KiB Swap:        0 total,        0 free,        0 used.  9873368 avail Mem
+
+
+
+
+
+
+

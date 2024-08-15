@@ -1,0 +1,22 @@
+127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
+::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+
+
+# PKMJ
+192.168.86.66     master-db.pkmj.com
+192.168.86.66     slave-db.pkmj.com
+192.168.86.30     amq.pkmj.com
+192.168.86.21     p2p-wallet.pkmj.com
+# PKMJ
+192.168.86.21     club8api.w88uat.com
+
+# MOCK
+192.168.86.29     mock-auth.pkmj.com
+192.168.86.29     mock-wallet.pkmj.com
+# MOCK
+
+# UAT override
+#192.168.86.29     integration.aqzbouatv2.com
+#192.168.86.29     api.w88uatv2.com
+
+

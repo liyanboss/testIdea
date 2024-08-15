@@ -1,0 +1,10 @@
+option batch on
+option confirm off
+open %1%
+option transfer binary
+
+get /pkmj/dataconsolidate/scripts %2%\CASH_DataConsolidate\pkmj\dataconsolidate\
+get /pkmj/dataconsolidate/running %2%\CASH_DataConsolidate\pkmj\dataconsolidate\
+
+close
+exit

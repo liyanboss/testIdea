@@ -1,0 +1,20 @@
+option batch on
+option confirm off
+open %1%
+rm /pkmj/httpserver/upload/*
+rm /pkmj/backoffice/upload/*
+rm /pkmj/lobbyserver/upload/*
+rm /pkmj/gameserver/upload/*
+option transfer binary
+put %2%\CommonBase\target\CommonBase-1.0-SNAPSHOT.jar /pkmj/httpserver/upload/
+put %2%\HttpServer\target\HttpServer /pkmj/httpserver/upload/
+put %2%\CommonBase\target\CommonBase-1.0-SNAPSHOT.jar /pkmj/backoffice/upload/
+put %2%\BackOffice\target\ROOT /pkmj/backoffice/upload/
+put %2%\CommonBase\target\CommonBase-1.0-SNAPSHOT.jar /pkmj/lobbyserver/upload/
+put %2%\ServerCore\target\ServerCore-1.0-SNAPSHOT.jar /pkmj/lobbyserver/upload/
+put %2%\LobbyServer\target\LobbyServer-1.0-SNAPSHOT.jar /pkmj/lobbyserver/upload/
+put %2%\CommonBase\target\CommonBase-1.0-SNAPSHOT.jar /pkmj/gameserver/upload/
+put %2%\ServerCore\target\ServerCore-1.0-SNAPSHOT.jar /pkmj/gameserver/upload/
+put %2%\GameServer\target\GameServer-1.0-SNAPSHOT.jar /pkmj/gameserver/upload/
+close
+exit

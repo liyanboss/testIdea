@@ -1,0 +1,9 @@
+option batch on
+option confirm off
+open %1%
+rm /pkmj/dataconsolidate/upload/*
+option transfer binary
+put %2%\CommonBase\target\CommonBase-1.0-SNAPSHOT.jar /pkmj/dataconsolidate/upload/
+put %2%\DataConsolidate\target\DataConsolidate-1.0-SNAPSHOT.jar /pkmj/dataconsolidate/upload/
+close
+exit

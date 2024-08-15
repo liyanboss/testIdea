@@ -1,0 +1,38 @@
+option batch on
+option confirm off
+open %1%
+option transfer binary
+
+put %2%\CASH_LobbyServer\pkmj\lobbyserver\scripts\backup.sh /pkmj/lobbyserver/scripts/
+put %2%\CASH_LobbyServer\pkmj\lobbyserver\scripts\deploy.sh /pkmj/lobbyserver/scripts/
+put %2%\CASH_LobbyServer\pkmj\lobbyserver\scripts\shutdown.sh /pkmj/lobbyserver/scripts/
+put %2%\CASH_LobbyServer\pkmj\lobbyserver\scripts\startup.sh /pkmj/lobbyserver/scripts/
+
+put %2%\CASH_LobbyServer\pkmj\lobbyserver\jdbc.properties /pkmj/lobbyserver/
+put %2%\CASH_LobbyServer\pkmj\lobbyserver\lobby_server.properties /pkmj/lobbyserver/
+put %2%\CASH_LobbyServer\pkmj\lobbyserver\logback.xml /pkmj/lobbyserver/
+
+put %2%\CASH_LobbyServer\pkmj\lobbyserver\running /pkmj/lobbyserver/
+put %2%\CASH_LobbyServer\pkmj\tools\apache-activemq-5.15.3-bin.tar.gz /pkmj/tools/
+
+
+put %2%\CASH_LobbyServer\pkmj\activemq_61616\scripts\backup.sh /pkmj/activemq_61616/scripts/
+put %2%\CASH_LobbyServer\pkmj\activemq_61616\scripts\monitor_amq.sh /pkmj/activemq_61616/scripts/
+put %2%\CASH_LobbyServer\pkmj\activemq_61616\scripts\restart_amq.sh /pkmj/activemq_61616/scripts/
+put %2%\CASH_LobbyServer\pkmj\activemq_61616\scripts\shutdown.sh /pkmj/activemq_61616/scripts/
+put %2%\CASH_LobbyServer\pkmj\activemq_61616\scripts\startup.sh /pkmj/activemq_61616/scripts/
+
+put %2%\CASH_LobbyServer\pkmj\tools\apache-activemq-5.15.3_61616\bin\env /pkmj/tools/apache-activemq-5.15.3_61616/bin/
+put %2%\CASH_LobbyServer\pkmj\tools\apache-activemq-5.15.3_61616\conf\activemq.xml /pkmj/tools/apache-activemq-5.15.3_61616/conf/
+
+put %2%\CASH_LobbyServer\pkmj\activemq_61626\scripts\backup.sh /pkmj/activemq_61626/scripts/
+put %2%\CASH_LobbyServer\pkmj\activemq_61626\scripts\monitor_amq.sh /pkmj/activemq_61626/scripts/
+put %2%\CASH_LobbyServer\pkmj\activemq_61626\scripts\restart_amq.sh /pkmj/activemq_61626/scripts/
+put %2%\CASH_LobbyServer\pkmj\activemq_61626\scripts\shutdown.sh /pkmj/activemq_61626/scripts/
+put %2%\CASH_LobbyServer\pkmj\activemq_61626\scripts\startup.sh /pkmj/activemq_61626/scripts/
+
+put %2%\CASH_LobbyServer\pkmj\tools\apache-activemq-5.15.3_61626\bin\env /pkmj/tools/apache-activemq-5.15.3_61626/bin/
+put %2%\CASH_LobbyServer\pkmj\tools\apache-activemq-5.15.3_61626\conf\activemq.xml /pkmj/tools/apache-activemq-5.15.3_61626/conf/
+
+close
+exit

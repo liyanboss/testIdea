@@ -1,0 +1,142 @@
+centos 7
+52.79.103.161
+login: root (with pem key)
+_GPIFish_CentOS.pem
+
+Memory: 16G
+Disk: 80G
+CPU: 4 Cores
+System: CentOS Linux 7
+
+How to connect to an EC2 instance using SSH using Windows, 
+follow url:  https://www.clickittech.com/aws/connect-ec2-instance-using-ssh/
+the ppk is here: D:\PKMJ\ProductPMahjongServer\dbAutomation\pkmj_deploy\ppk\52.79.103.161.ppk
+login as: centos
+Authenticating with public key "imported-openssh-key"
+Last login: Tue Jan 11 10:22:10 2022 from 180.190.117.18
+[centos@ip-172-31-30-200 ~]$
+
+sudo yum list installed | grep curl
+sudo yum list installed | grep tar
+sudo yum list installed | grep telnet
+sudo yum list installed | grep netstat
+sudo yum list installed | grep unzip
+sudo yum list installed | grep nginx
+sudo yum list installed | grep java
+sudo yum list installed | grep mysql
+sudo yum list installed | grep mariadb
+sudo yum list installed | grep mariadb-server
+
+sudo yum list search telnet
+sudo yum list search netstat
+sudo yum list search unzip
+sudo yum list search nginx
+sudo yum list search mariadb
+sudo yum list search mariadb-server
+
+sudo yum install telnet.x86_64
+sudo yum install unzip.x86_64
+sudo yum install nginx.x86_64
+sudo yum install mariadb.x86_64
+sudo yum install mariadb-server.x86_64
+
+1,install nginx in centos 7
+cat /etc/centos-release
+https://nginx.org/en/linux_packages.html#stable
+sudo yum install nginx.x86_64
+sudo systemctl start nginx
+curl -v http://127.0.0.1/
+curl -v http://172.31.30.200/
+curl -v http://52.79.103.161/
+sudo systemctl status nginx
+sudo /usr/sbin/nginx -s reload
+sudo /usr/sbin/nginx -s stop
+sudo systemctl stop nginx
+
+2,change centos7 timezone
+ls -l /etc/localtime
+sudo rm -rf /etc/localtime
+sudo ln -s /usr/share/zoneinfo/Singapore /etc/localtime
+
+3,install mysql server
+sudo yum install mariadb-server.x86_64
+sudo systemctl start mariadb.service
+sudo mysql_secure_installation
+(mysql root pass is: 1234)
+mysql --host=127.0.0.1 --user=root --password=1234 --database=mysql
+SHOW VARIABLES LIKE 'char%';
+SHOW VARIABLES LIKE 'coll%';
+
+4,Once the installation is complete, enable MariaDB to start on boot and start the service:
+sudo systemctl enable mariadb
+sudo systemctl start mariadb
+To verify the installation check the MariaDB service status by typing:
+sudo systemctl status mariadb
+
+5,create pokermahjong database and mysql user
+CREATE DATABASE pokermahjong DEFAULT CHARACTER SET = utf8 DEFAULT COLLATE = utf8_unicode_ci;
+#grant all privileges on *.* to 'test_user_123'@'%' identified by 'Test_Pass_123';
+#flush privileges;
+mysql --host=127.0.0.1 --user=test_user_123 --password=Test_Pass_123 --database=pokermahjong
+
+6,upload files to server
+pscp -P 22 -i D:\PKMJ\ProductPMahjongServer\dbAutomation\pkmj_deploy\ppk\52.79.103.161.ppk -r D:\PKMJ\ProductPMahjongServer\dbAutomation\pkmj_deploy\new_uat\uat_86_29\pkmj\* centos@52.79.103.161:/pkmj
+pscp -P 22 -i D:\PKMJ\ProductPMahjongServer\dbAutomation\pkmj_deploy\ppk\52.79.103.161.ppk -r D:\PKMJ\Setup\Tools_52.79.103.161\* centos@52.79.103.161:/pkmj/tools
+pscp -P 22 -i D:\PKMJ\ProductPMahjongServer\dbAutomation\pkmj_deploy\ppk\52.79.103.161.ppk -r D:\PKMJ\ProductPMahjongServer\dbAutomation\pkmj_deploy\new_uat\uat_86_30\pkmj\* centos@52.79.103.161:/pkmj
+
+7,install java 8 with Alternatives
+cd /pkmj/tools/
+tar zxvf jdk-8u172-linux-x64.tar.gz
+sudo mv jdk1.8.0_172/ /opt/
+cd /opt/jdk1.8.0_172/
+sudo alternatives --install /usr/bin/java java /opt/jdk1.8.0_172/bin/java 180172
+sudo alternatives --config java
+
+8,install tomcat and activemq
+cd /pkmj/tools/
+tar zxvf apache-tomcat-9.0.34.tar.gz
+mv apache-tomcat-9.0.34 apache-tomcat-9.0.34_HttpServer
+ln -sv /pkmj/tools/apache-tomcat-9.0.34_HttpServer /pkmj/apache-tomcat-HttpServer
+tar zxvf apache-tomcat-9.0.34.tar.gz
+mv apache-tomcat-9.0.34 apache-tomcat-9.0.34_BackOffice
+ln -sv /pkmj/tools/apache-tomcat-9.0.34_BackOffice /pkmj/apache-tomcat-BackOffice
+tar zxvf apache-tomcat-9.0.34.tar.gz
+mv apache-tomcat-9.0.34 apache-tomcat-9.0.34_NewBackOffice
+ln -sv /pkmj/tools/apache-tomcat-9.0.34_NewBackOffice /pkmj/apache-tomcat-NewBackOffice
+cd /pkmj/tools/
+tar zxvf apache-activemq-5.15.3-bin.tar.gz
+mv apache-activemq-5.15.3 apache-activemq-5.15.3_61616
+ln -sv /pkmj/tools/apache-activemq-5.15.3_61616 /pkmj/activemq_61616/apache-activemq
+tar zxvf apache-activemq-5.15.3-bin.tar.gz
+mv apache-activemq-5.15.3 apache-activemq-5.15.3_61626
+ln -sv /pkmj/tools/apache-activemq-5.15.3_61626 /pkmj/activemq_61626/apache-activemq
+
+9,add the hosts mapping
+sudo less /etc/hosts
+172.31.30.200     master-db.pkmj.com
+172.31.30.200     slave-db.pkmj.com
+172.31.30.200     amq.pkmj.com
+
+10,open port for outside access
+sudo netstat -tulpn | grep 3306
+sudo firewall-cmd --add-port=3306/tcp;
+sudo firewall-cmd --remove-port=3306/tcp;
+sudo firewall-cmd  --reload;
+sudo firewall-cmd --list-all
+
+11,generate sql files 
+mysqldump -uroot -proot pokermahjong -n -d > d:\sql\pkmj_table_schema.sql
+mysqldump -uroot -proot pokermahjong -n -t > d:\sql\pkmj_init_data.sql
+mysqldump -uroot -proot pokermahjong -n -d -t -R > d:\sql\pkmj_routines.sql
+pscp -P 22 -i D:\PKMJ\ProductPMahjongServer\dbAutomation\pkmj_deploy\ppk\52.79.103.161.ppk -r D:\sql\* centos@52.79.103.161:/pkmj/tools
+
+12,do setup for GPMJ for demo in AWS
+CREATE DATABASE pokermahjong_240215 DEFAULT CHARACTER SET = utf8 DEFAULT COLLATE = utf8_unicode_ci;
+pscp -P 22 -i D:\PKMJ\ProductPMahjongServer\dbAutomation\pkmj_deploy\ppk\52.79.103.161.ppk -r D:\PKMJ\ROOT\html5PokerMahjong centos@52.79.103.161:/pokermahjong/webapps/ROOT/
+mysqldump -h127.0.0.1 -uroot -proot pokermahjong_240215 -R > d:\pokermahjong_240215.sql
+pscp -P 22 -i D:\PKMJ\ProductPMahjongServer\dbAutomation\pkmj_deploy\ppk\52.79.103.161.ppk -r d:\pokermahjong_240215.sql centos@52.79.103.161:/pkmj/tools
+
+
+
+
+

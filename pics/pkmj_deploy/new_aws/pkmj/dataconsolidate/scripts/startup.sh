@@ -1,0 +1,9 @@
+#!/bin/sh
+sudo rm -rf /pkmj/dataconsolidate/logs/*
+sudo nohup java -Xms256M -Xmx256M -Djdk.xml.entityExpansionLimit=0 -classpath ".:/pkmj/dataconsolidate/running/*" com.pkmj.dc.DataConsolidateLauncher > /pkmj/dataconsolidate/logs/nohup_dataconsolidate.out &
+sudo sleep 3s
+echo '------ dataconsolidate started, waiting LOG file ready...... ------'
+sudo sleep 10s
+new_dc_log_file=dataconsolidate.$(date +%Y-%m-%d).log
+sudo less /pkmj/dataconsolidate/logs/"$new_dc_log_file" | grep ERROR
+echo '------ dataconsolidate checkLogs Done ------'

@@ -1,0 +1,464 @@
+Install CentOS-7 and Others:
+1,install CentOS-7-x86_64-Minimal-2009
+localhost login: root / CentOS-7
+1.2,create new linux user
+useradd leeli
+passwd leeli (leeli1234)
+ssh leeli:leeli1234@172.25.159.114
+2,Adding User to the sudoers File
+vi /etc/sudoers
+## Allow root to run any commands anywhere
+root    ALL=(ALL)       ALL
+leeli   ALL=(ALL)       ALL
+3,change centos7 timezone
+ls -l /etc/localtime
+sudo rm -rf /etc/localtime
+sudo ln -s /usr/share/zoneinfo/Singapore /etc/localtime
+4,install mysql server
+sudo yum search mariadb
+sudo yum install mariadb-server.x86_64
+sudo systemctl start mariadb.service
+sudo mysql_secure_installation
+(mysql root pass is: root)
+4.2,Once the installation is complete, enable MariaDB to start on boot and start the service:
+sudo systemctl enable mariadb
+sudo systemctl start mariadb
+To verify the installation check the MariaDB service status by typing:
+sudo systemctl status mariadb
+5,create mysql user
+#grant all privileges on *.* to 'test_user_123'@'%' identified by 'Test_Pass_123';
+#flush privileges;
+mysql --host=127.0.0.1 --user=test_user_123 --password=Test_Pass_123 --database=pokermahjong
+6,open mysql 3306 for outside access
+sudo netstat -tulpn | grep 3306
+sudo firewall-cmd --add-port=3306/tcp;
+sudo firewall-cmd --remove-port=3306/tcp;
+sudo firewall-cmd  --reload;
+
+
+
+
+
+
+
+
+
+
+
+
+[leeli@localhost pkmj]$
+[leeli@localhost pkmj]$ sudo mysql_secure_installation
+
+NOTE: RUNNING ALL PARTS OF THIS SCRIPT IS RECOMMENDED FOR ALL MariaDB
+      SERVERS IN PRODUCTION USE!  PLEASE READ EACH STEP CAREFULLY!
+
+In order to log into MariaDB to secure it, we'll need the current
+password for the root user.  If you've just installed MariaDB, and
+you haven't set the root password yet, the password will be blank,
+so you should just press enter here.
+
+Enter current password for root (enter for none):
+OK, successfully used password, moving on...
+
+Setting the root password ensures that nobody can log into the MariaDB
+root user without the proper authorisation.
+
+Set root password? [Y/n] Y
+New password:
+Re-enter new password:
+Password updated successfully!
+Reloading privilege tables..
+ ... Success!
+
+
+By default, a MariaDB installation has an anonymous user, allowing anyone
+to log into MariaDB without having to have a user account created for
+them.  This is intended only for testing, and to make the installation
+go a bit smoother.  You should remove them before moving into a
+production environment.
+
+Remove anonymous users? [Y/n] Y
+ ... Success!
+
+Normally, root should only be allowed to connect from 'localhost'.  This
+ensures that someone cannot guess at the root password from the network.
+
+Disallow root login remotely? [Y/n] Y
+ ... Success!
+
+By default, MariaDB comes with a database named 'test' that anyone can
+access.  This is also intended only for testing, and should be removed
+before moving into a production environment.
+
+Remove test database and access to it? [Y/n] Y
+ - Dropping test database...
+ ... Success!
+ - Removing privileges on test database...
+ ... Success!
+
+Reloading the privilege tables will ensure that all changes made so far
+will take effect immediately.
+
+Reload privilege tables now? [Y/n] Y
+ ... Success!
+
+Cleaning up...
+
+All done!  If you've completed all of the above steps, your MariaDB
+installation should now be secure.
+
+Thanks for using MariaDB!
+[leeli@localhost pkmj]$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1,run dbAutomation, get latest database
+mysqldump -uroot -p pokermahjong -n -d > d:\pkmj_table_schema.sql
+mysqldump -uroot -p pokermahjong -n -t > d:\pkmj_init_data.sql
+mysqldump -uroot -p pokermahjong -n -d -t -R > d:\pkmj_routines.sql
+mysqldump -uroot -p pokermahjong -n -t gameuser > d:\pkmj_robot_user.sql
+backoffice jdbc url need append:  useUnicode=true&characterEncoding=utf8
+
+1.1,install wget in centos 7
+sudo yum install wget.x86_64
+wget https://edelivery.oracle.com/akam/otn/java/jdk/8u172-b11/a58eab1ec242421181065cdc37240b08/jdk-8u172-linux-x64.tar.gz  ***
+wget https://archive.apache.org/dist/tomcat/tomcat-9/v9.0.34/bin/apache-tomcat-9.0.34.tar.gz
+wget http://archive.apache.org/dist/activemq/5.15.3/apache-activemq-5.15.3-bin.tar.gz
+
+2,install java 8 with Alternatives
+cd /pkmj/tools/
+tar zxvf jdk-8u172-linux-x64.tar.gz
+sudo mv jdk1.8.0_172/ /opt/
+cd /opt/jdk1.8.0_172/
+sudo alternatives --install /usr/bin/java java /opt/jdk1.8.0_172/bin/java 180172
+sudo alternatives --config java
+
+3,install nginx in centos 7
+cat /etc/centos-release
+https://nginx.org/en/linux_packages.html#stable
+sudo yum list installed | grep yum-utils
+sudo yum install nginx.x86_64
+sudo systemctl start nginx
+sudo systemctl status nginx
+sudo /usr/sbin/nginx -s reload
+sudo /usr/sbin/nginx -s stop
+sudo systemctl stop nginx
+
+4,install tomcat and activemq
+cd /pkmj/tools/
+tar zxvf apache-tomcat-9.0.34.tar.gz
+mv apache-tomcat-9.0.34 apache-tomcat-9.0.34_HttpServer
+ln -sv /pkmj/tools/apache-tomcat-9.0.34_HttpServer /pkmj/apache-tomcat-HttpServer
+tar zxvf apache-tomcat-9.0.34.tar.gz
+mv apache-tomcat-9.0.34 apache-tomcat-9.0.34_BackOffice
+ln -sv /pkmj/tools/apache-tomcat-9.0.34_BackOffice /pkmj/apache-tomcat-BackOffice
+tar zxvf apache-tomcat-9.0.34.tar.gz
+mv apache-tomcat-9.0.34 apache-tomcat-9.0.34_NewBackOffice
+ln -sv /pkmj/tools/apache-tomcat-9.0.34_NewBackOffice /pkmj/apache-tomcat-NewBackOffice
+cd /pkmj/tools/
+tar zxvf apache-activemq-5.15.3-bin.tar.gz
+mv apache-activemq-5.15.3 apache-activemq-5.15.3_61616
+ln -sv /pkmj/tools/apache-activemq-5.15.3_61616 /pkmj/activemq_61616/apache-activemq
+tar zxvf apache-activemq-5.15.3-bin.tar.gz
+mv apache-activemq-5.15.3 apache-activemq-5.15.3_61626
+ln -sv /pkmj/tools/apache-activemq-5.15.3_61626 /pkmj/activemq_61626/apache-activemq
+
+5,add the hosts mapping
+sudo less /etc/hosts
+172.31.39.176     master-db.pkmj.com
+172.31.39.176     slave-db.pkmj.com
+172.31.40.252     amq.pkmj.com
+
+
+
+AWS setup problem list:
+1, MySQL problem. create function next_val, “ERROR 1419: You do not have the SUPER privilege and binary logging is enabled”
+link ->  http://iwearshorts.com/blog/amazon-rds-creating-functions-in-mysql/
+check MySQL character_set  'show variables like "%char%";' , ask AWS side set all character_set to utf8 instead of latin1
+link ->  https://aws.amazon.com/rds/mysql/
+2, NGINX as a WebSocket Proxy. chech aws_new\pkmj\nginxserver\scripts\nginx_running.conf
+link ->  http://nginx.org/en/docs/http/websocket.html
+3, WebSocket connections being disconnected after 100 seconds.
+link ->  https://github.com/kubernetes/ingress-nginx/issues/5539
+link ->  https://github.com/kubernetes/ingress-nginx/issues/5167
+4, pokermahjongstub/cas.properties, please change p2p.bo.domain accordingly
+5, cas default user is Admin_W88, please update DB, set FK_ROLE_ID=1 in userprofile table
+6, update all robots account, update gameuser set PLAY_MONEY=PLAY_MONEY*100 where ID>1100;
+7, change the /etc/hosts, /etc/crontab  
+8, 
+
+
+
+
+
+
+
+=====================================================================================================================================================================
+How to install mysql-5.6.49 in centos 7?
+1, create repo file in /etc/yum.repos.d/mysql-community.repo with content:
+# Enable to use MySQL 5.6
+[mysql56-community]
+name=MySQL 5.6 Community Server
+baseurl=http://repo.mysql.com/yum/mysql-5.6-community/el/7/$basearch/
+enabled=1
+gpgcheck=0
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-mysql
+
+[mysql57-community]
+name=MySQL 5.7 Community Server
+baseurl=http://repo.mysql.com/yum/mysql-5.7-community/el/7/$basearch/
+enabled=0
+gpgcheck=0
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-mysql
+
+[mysql80-community]
+name=MySQL 8.0 Community Server
+baseurl=http://repo.mysql.com/yum/mysql-8.0-community/el/7/$basearch/
+enabled=0
+gpgcheck=0
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-mysql
+2, start mysqld
+$ sudo systemctl status mysqld
+$ sudo systemctl start mysqld
+$ sudo systemctl status mysqld
+logs look like:
+● mysqld.service - MySQL Community Server
+   Loaded: loaded (/usr/lib/systemd/system/mysqld.service; enabled; vendor preset: disabled)
+   Active: active (running) since Wed 2020-09-23 05:50:31 EDT; 2s ago
+  Process: 1805 ExecStartPost=/usr/bin/mysql-systemd-start post (code=exited, status=0/SUCCESS)
+  Process: 1744 ExecStartPre=/usr/bin/mysql-systemd-start pre (code=exited, status=0/SUCCESS)
+ Main PID: 1804 (mysqld_safe)
+   CGroup: /system.slice/mysqld.service
+           ├─1804 /bin/sh /usr/bin/mysqld_safe --basedir=/usr
+           └─1970 /usr/sbin/mysqld --basedir=/usr --datadir=/var/lib/mysql --plugin-dir=/usr/lib64/mysql/plugin --log-error=/var/...
+
+Sep 23 05:50:28 CentOS7 mysql-systemd-start[1744]: 2020-09-23 05:50:28 1780 [Note] InnoDB: Starting shutdown...
+Sep 23 05:50:30 CentOS7 mysql-systemd-start[1744]: 2020-09-23 05:50:30 1780 [Note] InnoDB: Shutdown completed; log sequence...625987
+Sep 23 05:50:30 CentOS7 mysql-systemd-start[1744]: PLEASE REMEMBER TO SET A PASSWORD FOR THE MySQL root USER !
+Sep 23 05:50:30 CentOS7 mysql-systemd-start[1744]: To do so, start the server, then issue the following commands:
+Sep 23 05:50:30 CentOS7 mysql-systemd-start[1744]: /usr/bin/mysqladmin -u root password 'new-password'
+Sep 23 05:50:30 CentOS7 mysql-systemd-start[1744]: /usr/bin/mysqladmin -u root -h CentOS7 password 'new-password'
+Sep 23 05:50:30 CentOS7 mysql-systemd-start[1744]: Alternatively you can run:
+Sep 23 05:50:30 CentOS7 mysqld_safe[1804]: 200923 05:50:30 mysqld_safe Logging to '/var/log/mysqld.log'.
+Sep 23 05:50:30 CentOS7 mysqld_safe[1804]: 200923 05:50:30 mysqld_safe Starting mysqld daemon with databases from /var/lib/mysql
+Sep 23 05:50:31 CentOS7 systemd[1]: Started MySQL Community Server.
+Hint: Some lines were ellipsized, use -l to show in full.
+3, SET A PASSWORD FOR THE MySQL root USER
+$ /usr/bin/mysqladmin -u root password 'new-password'
+4, mysql -uroot -pnew-password, then create a new user
+grant all privileges on mydb.* to 'user1234'@'172.%' identified by 'Pass@1234';
+flush privileges;
+5, test connect from client by 'mysql -h172.29.10.48 -uuser1234 -p"Pass@1234"'
+6, check mysql character_set_server, need change to utf8
+edit /etc/my.cnf, add to [mysqld] section
+character-set-server=utf8
+collation-server=utf8_general_ci
+show variables like '%char%';
+$ sudo systemctl stop mysqld
+$ sudo systemctl start mysqld
+$ sudo systemctl status mysqld
+7, check the centos server timezone, change to gmt+8, optional
+8, check centos7 firewall settings
+$ sudo firewall-cmd --list-all
+You can remove the mysql service with the following command
+$ sudo firewall-cmd --remove-service=mysql --permanent
+add mysql service(default port 3306) with the following command
+$ sudo firewall-cmd --add-service=mysql --permanent
+Once you’re done, restart firewalld with the following command:
+$ sudo firewall-cmd --reload
+Now if you check the firewalld services again:
+$ sudo firewall-cmd --list-all
+=====================================================================================================================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+===============================================================================================
+How to install mysql-5.6.11-linux-glibc2.5-x86_64.tar.gz to centos 7?
+1, https://dev.mysql.com/doc/refman/5.6/en/binary-installation.html
+2, MySQL has a dependency on the libaio library.
+shell> yum search libaio  # search for info
+shell> yum install libaio # install library
+shell> yum install libaio-devel.x86_64
+shell> yum install perl.x86_64
+shell> yum install perl-devel.x86_64
+shell> yum perl-Data-Dumper.x86_64
+3, To install and use a MySQL binary distribution, the command sequence looks like this:
+shell> groupadd mysql
+shell> useradd -r -g mysql -s /bin/false mysql
+shell> cd /usr/local
+shell> tar zxvf /path/to/mysql-VERSION-OS.tar.gz
+shell> ln -s full-path-to-mysql-VERSION-OS mysql
+shell> cd mysql
+shell> scripts/mysql_install_db --user=mysql
+shell> bin/mysqld_safe --user=mysql &
+
+shell> /bin/mysql_secure_installation
+
+# Next command is optional
+shell> cp support-files/mysql.server /etc/init.d/mysql.server
+
+
+
+
+
+-------------------------------------------------------------------------------
+To start mysqld at boot time you have to copy
+support-files/mysql.server to the right place for your system
+
+PLEASE REMEMBER TO SET A PASSWORD FOR THE MySQL root USER !
+To do so, start the server, then issue the following commands:
+
+  ./bin/mysqladmin -u root password 'new-password'
+  ./bin/mysqladmin -u root -h CentOS7 password 'new-password'
+
+Alternatively you can run:
+
+  ./bin/mysql_secure_installation
+
+which will also give you the option of removing the test
+databases and anonymous user created by default.  This is
+strongly recommended for production servers.
+
+See the manual for more instructions.
+
+You can start the MySQL daemon with:
+
+  cd . ; ./bin/mysqld_safe &
+
+You can test the MySQL daemon with mysql-test-run.pl
+
+  cd mysql-test ; perl mysql-test-run.pl
+
+Please report any problems with the ./bin/mysqlbug script!
+
+The latest information about MySQL is available on the web at
+
+  http://www.mysql.com
+
+Support MySQL by buying support/licenses at http://shop.mysql.com
+
+New default config file was created as ./my.cnf and
+will be used by default by the server when you start it.
+You may edit this file to change server settings
+-------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+===============================================================================================
+https://nginx.org/en/linux_packages.html#RHEL-CentOS
+https://nginx.org/en/docs/beginners_guide.html
+
+Installation instructions
+Before you install nginx for the first time on a new machine, you need to set up the nginx packages repository. Afterward, you can install and update nginx from the repository.
+
+RHEL/CentOS
+Install the prerequisites:
+
+sudo yum install yum-utils
+To set up the yum repository, create the file named /etc/yum.repos.d/nginx.repo with the following contents:
+
+[nginx-stable]
+name=nginx stable repo
+baseurl=http://nginx.org/packages/centos/$releasever/$basearch/
+gpgcheck=1
+enabled=1
+gpgkey=https://nginx.org/keys/nginx_signing.key
+module_hotfixes=true
+
+[nginx-mainline]
+name=nginx mainline repo
+baseurl=http://nginx.org/packages/mainline/centos/$releasever/$basearch/
+gpgcheck=1
+enabled=0
+gpgkey=https://nginx.org/keys/nginx_signing.key
+module_hotfixes=true
+By default, the repository for stable nginx packages is used. If you would like to use mainline nginx packages, run the following command:
+
+sudo yum-config-manager --enable nginx-mainline
+To install nginx, run the following command:
+
+sudo yum install nginx
+When prompted to accept the GPG key, verify that the fingerprint matches 573B FD6B 3D8F BC64 1079 A6AB ABF5 BD82 7BD9 BF62, and if so, accept it.
+
+===============================================================================================
+
+
+
+

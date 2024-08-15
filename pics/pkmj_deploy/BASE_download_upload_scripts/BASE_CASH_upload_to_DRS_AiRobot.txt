@@ -1,0 +1,48 @@
+option batch on
+option confirm off
+open %1%
+option transfer binary
+
+put %2%\CASH_AiRobot\pkmj\airobot_bcmn\scripts\backup.sh /pkmj/airobot_bcmn/scripts/
+put %2%\CASH_AiRobot\pkmj\airobot_bcmn\scripts\deploy.sh /pkmj/airobot_bcmn/scripts/
+put %2%\CASH_AiRobot\pkmj\airobot_bcmn\scripts\shutdown.sh /pkmj/airobot_bcmn/scripts/
+put %2%\CASH_AiRobot\pkmj\airobot_bcmn\scripts\startup.sh /pkmj/airobot_bcmn/scripts/
+
+put %2%\CASH_AiRobot\pkmj\airobot_bcmn\ai_robot.properties /pkmj/airobot_bcmn/
+put %2%\CASH_AiRobot\pkmj\airobot_bcmn\logback.xml /pkmj/airobot_bcmn/
+
+put %2%\CASH_AiRobot\pkmj\airobot_bcmn\running /pkmj/airobot_bcmn/
+
+
+put %2%\CASH_AiRobot\pkmj\airobot_big2\scripts /pkmj/airobot_big2/
+put %2%\CASH_AiRobot\pkmj\airobot_big2\running /pkmj/airobot_big2/
+
+put %2%\CASH_AiRobot\pkmj\airobot_ddzb\scripts /pkmj/airobot_ddzb/
+put %2%\CASH_AiRobot\pkmj\airobot_ddzb\running /pkmj/airobot_ddzb/
+
+put %2%\CASH_AiRobot\pkmj\airobot_dmqq\scripts /pkmj/airobot_dmqq/
+put %2%\CASH_AiRobot\pkmj\airobot_dmqq\running /pkmj/airobot_dmqq/
+
+put %2%\CASH_AiRobot\pkmj\airobot_fish\scripts /pkmj/airobot_fish/
+put %2%\CASH_AiRobot\pkmj\airobot_fish\running /pkmj/airobot_fish/
+
+put %2%\CASH_AiRobot\pkmj\airobot_ggth\scripts /pkmj/airobot_ggth/
+put %2%\CASH_AiRobot\pkmj\airobot_ggth\running /pkmj/airobot_ggth/
+
+put %2%\CASH_AiRobot\pkmj\airobot_niuniu\scripts /pkmj/airobot_niuniu/
+put %2%\CASH_AiRobot\pkmj\airobot_niuniu\running /pkmj/airobot_niuniu/
+
+put %2%\CASH_AiRobot\pkmj\airobot_pkdn\scripts /pkmj/airobot_pkdn/
+put %2%\CASH_AiRobot\pkmj\airobot_pkdn\running /pkmj/airobot_pkdn/
+
+put %2%\CASH_AiRobot\pkmj\airobot_rmin\scripts /pkmj/airobot_rmin/
+put %2%\CASH_AiRobot\pkmj\airobot_rmin\running /pkmj/airobot_rmin/
+
+put %2%\CASH_AiRobot\pkmj\airobot_tlmn\scripts /pkmj/airobot_tlmn/
+put %2%\CASH_AiRobot\pkmj\airobot_tlmn\running /pkmj/airobot_tlmn/
+
+put %2%\CASH_AiRobot\pkmj\airobot_txhd\scripts /pkmj/airobot_txhd/
+put %2%\CASH_AiRobot\pkmj\airobot_txhd\running /pkmj/airobot_txhd/
+
+close
+exit

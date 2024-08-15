@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+	<property name="LOG_HOME" value="/pkmj/airobot_all/logs" />
+	<property name="AR_LEVEL" value="DEBUG" />
+	<property name="ROOT_LEVEL" value="ERROR" />
+	
+	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} %-5level %logger{5} - %msg%n</pattern>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<maxHistory>45</maxHistory>
+			<FileNamePattern>${LOG_HOME}/airobot.%d{yyyy-MM-dd}.log.zip</FileNamePattern>
+		</rollingPolicy>
+	</appender>
+
+	<appender name="OTHER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} %-5level %logger{5} - %msg%n</pattern>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<maxHistory>45</maxHistory>
+			<FileNamePattern>${LOG_HOME}/other-airobot.%d{yyyy-MM-dd}.log.zip</FileNamePattern>
+		</rollingPolicy>
+	</appender>
+
+	<logger name="com.pkmj" level="${AR_LEVEL}" additivity="false">
+		<appender-ref ref="FILE" />
+	</logger>
+
+	<root level="${ROOT_LEVEL}">
+		<appender-ref ref="OTHER" />
+	</root>
+
+</configuration>

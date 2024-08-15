@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<included>
+	<property name="LOG_HOME" value="/pkmj/newbackoffice/logs" />
+	<property name="BO_LEVEL" value="DEBUG" />
+	<property name="ROOT_LEVEL" value="ERROR" />
+</included>

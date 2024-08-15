@@ -1,0 +1,29 @@
+option batch on
+option confirm off
+open %1%
+option transfer binary
+
+get /pkmj/httpserver/scripts/backup.sh %2%\CASH_HttpServer\pkmj\httpserver\scripts\
+get /pkmj/httpserver/scripts/deploy.sh %2%\CASH_HttpServer\pkmj\httpserver\scripts\
+get /pkmj/httpserver/scripts/shutdown.sh %2%\CASH_HttpServer\pkmj\httpserver\scripts\
+get /pkmj/httpserver/scripts/startup.sh %2%\CASH_HttpServer\pkmj\httpserver\scripts\
+
+get /pkmj/httpserver/jdbc.properties %2%\CASH_HttpServer\pkmj\httpserver\
+get /pkmj/httpserver/logbackConfig.xml %2%\CASH_HttpServer\pkmj\httpserver\
+
+get /pkmj/tools/apache-tomcat-9.0.34.tar.gz %2%\CASH_HttpServer\pkmj\tools\
+
+get /pkmj/tools/apache-tomcat-9.0.34_HttpServer/bin/setenv.sh %2%\CASH_HttpServer\pkmj\tools\apache-tomcat-9.0.34_HttpServer\bin\
+get /pkmj/tools/apache-tomcat-9.0.34_HttpServer/conf/server.xml %2%\CASH_HttpServer\pkmj\tools\apache-tomcat-9.0.34_HttpServer\conf\
+get /pkmj/tools/apache-tomcat-9.0.34_HttpServer/conf/web.xml %2%\CASH_HttpServer\pkmj\tools\apache-tomcat-9.0.34_HttpServer\conf\
+
+get /pkmj/tools/apache-tomcat-9.0.34_HttpServer/webapps %2%\CASH_HttpServer\pkmj\tools\apache-tomcat-9.0.34_HttpServer\
+
+get /pkmj/change_to_maintenance_mode.sh %2%\CASH_HttpServer\pkmj\
+get /pkmj/change_to_running_mode.sh %2%\CASH_HttpServer\pkmj\
+
+get /pkmj/nginxserver/scripts %2%\CASH_HttpServer\pkmj\nginxserver\
+get /pkmj/nginxserver/root_maintenance %2%\CASH_HttpServer\pkmj\nginxserver\
+
+close
+exit

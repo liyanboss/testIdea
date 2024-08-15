@@ -1,0 +1,44 @@
+#For NC, no new entry above, between this and next comments
+103.89.23.97      svpn.thismonitor.net
+#end of NC entry
+# Copyright (c) 1993-2009 Microsoft Corp.
+#
+# This is a sample HOSTS file used by Microsoft TCP/IP for Windows.
+#
+# This file contains the mappings of IP addresses to host names. Each
+# entry should be kept on an individual line. The IP address should
+# be placed in the first column followed by the corresponding host name.
+# The IP address and the host name should be separated by at least one
+# space.
+#
+# Additionally, comments (such as these) may be inserted on individual
+# lines or following the machine name denoted by a '#' symbol.
+#
+# For example:
+#
+#      102.54.94.97     rhino.acme.com          # source server
+#       38.25.63.10     x.acme.com              # x client host
+
+# localhost name resolution is handled within DNS itself.
+	127.0.0.1       localhost
+#	::1             localhost
+
+# PKMJ-LOCAL
+127.0.0.1  master-db.pkmj.com
+127.0.0.1  slave-db.pkmj.com
+127.0.0.1  amq.pkmj.com
+127.0.0.1  mock-auth.pkmj.com
+127.0.0.1  p2p-wallet.pkmj.com
+# PKMJ-LOCAL
+
+
+# UAT
+#192.168.86.27     master-db.pkmj.com
+#192.168.86.27     slave-db.pkmj.com
+#192.168.86.30     amq.pkmj.com
+
+# PROD
+#10.1.88.126       master-db.pkmj.com
+##10.1.88.76        slave-db.pkmj.com
+#10.1.88.73        slave-db.pkmj.com
+#192.168.77.84     amq.pkmj.com

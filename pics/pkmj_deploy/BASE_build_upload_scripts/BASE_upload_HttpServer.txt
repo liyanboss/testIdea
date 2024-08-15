@@ -1,0 +1,9 @@
+option batch on
+option confirm off
+open %1%
+rm /pkmj/httpserver/upload/*
+option transfer binary
+put %2%\CommonBase\target\CommonBase-1.0-SNAPSHOT.jar /pkmj/httpserver/upload/
+put %2%\HttpServer\target\HttpServer /pkmj/httpserver/upload/
+close
+exit

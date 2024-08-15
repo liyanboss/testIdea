@@ -1,0 +1,43 @@
+1,For BackOffice
+mkdir D:/PKMJ/PM_Files/SyncDR/77_86_BO/webapps/ROOT/
+pscp -P 22 -r pmjuser01@192.168.77.86:/pkmj/apache-tomcat-BackOffice/webapps/ROOT/* D:/PKMJ/PM_Files/SyncDR/77_86_BO/webapps/ROOT/
+pscp -P 22 -r D:/PKMJ/PM_Files/SyncDR/77_86_BO/webapps/ROOT/* pmj.support01@192.168.71.36:/pkmj/apache-tomcat-BackOffice/webapps/ROOT/
+cp /pkmj/backoffice/jdbc.properties /pkmj/apache-tomcat-BackOffice/webapps/ROOT/WEB-INF/classes/
+
+2,For HttpServer
+mkdir D:/PKMJ/PM_Files/SyncDR/77_82_HS/webapps/HttpServer/
+pscp -P 22 -r pmjuser01@192.168.77.82:/pkmj/apache-tomcat-HttpServer/webapps/HttpServer/* D:/PKMJ/PM_Files/SyncDR/77_82_HS/webapps/HttpServer/
+pscp -P 22 -r D:/PKMJ/PM_Files/SyncDR/77_82_HS/webapps/HttpServer/* pmj.support01@192.168.71.32:/pkmj/apache-tomcat-HttpServer/webapps/HttpServer/
+cp /pkmj/httpserver/jdbc.properties /pkmj/apache-tomcat-HttpServer/webapps/HttpServer/WEB-INF/classes/
+
+3,For LobbyServer
+mkdir D:/PKMJ/PM_Files/SyncDR/77_84_LS/lobbyserver/running/
+pscp -P 22 -r pmjuser01@192.168.77.84:/pkmj/lobbyserver/running/* D:/PKMJ/PM_Files/SyncDR/77_84_LS/lobbyserver/running/
+pscp -P 22 -r D:/PKMJ/PM_Files/SyncDR/77_84_LS/lobbyserver/running/* pmj.support01@192.168.71.34:/pkmj/lobbyserver/running/
+cp /pkmj/lobbyserver/jdbc.properties /pkmj/lobbyserver/running/
+
+4,For GameServer
+mkdir D:/PKMJ/PM_Files/SyncDR/77_83_GS/gameserver/running/
+pscp -P 22 -r pmjuser01@192.168.77.83:/pkmj/gameserver/running/* D:/PKMJ/PM_Files/SyncDR/77_83_GS/gameserver/running/
+pscp -P 22 -r D:/PKMJ/PM_Files/SyncDR/77_83_GS/gameserver/running/* pmj.support01@192.168.71.33:/pkmj/gameserver/running/
+cp /pkmj/gameserver/jdbc.properties /pkmj/gameserver/running/
+
+5,For DataConsolidate
+mkdir D:/PKMJ/PM_Files/SyncDR/77_85_DC/dataconsolidate/running/
+pscp -P 22 -r pmjuser01@192.168.77.85:/pkmj/dataconsolidate/running/* D:/PKMJ/PM_Files/SyncDR/77_85_DC/dataconsolidate/running/
+pscp -P 22 -r D:/PKMJ/PM_Files/SyncDR/77_85_DC/dataconsolidate/running/* pmj.support01@192.168.71.35:/pkmj/dataconsolidate/running/
+cp /pkmj/dataconsolidate/jdbc.properties /pkmj/dataconsolidate/running/
+
+6,For AiRobot
+mkdir D:/PKMJ/PM_Files/SyncDR/77_85_AR/airobot/upload/
+pscp -P 22 -r pmjuser01@192.168.77.85:/pkmj/airobot_niuniu/running/AiRobot-1.0-SNAPSHOT.jar D:/PKMJ/PM_Files/SyncDR/77_85_AR/airobot/upload/
+pscp -P 22 -r pmjuser01@192.168.77.85:/pkmj/airobot_niuniu/running/CommonBase-1.0-SNAPSHOT.jar D:/PKMJ/PM_Files/SyncDR/77_85_AR/airobot/upload/
+pscp -P 22 -r D:/PKMJ/PM_Files/SyncDR/77_85_AR/airobot/upload/* pmj.support01@192.168.71.35:/pkmj/airobot_niuniu/upload/
+sudo /pkmj/copy_niuniu_upload_to_others.sh
+sudo /pkmj/bots_deploy_1by1.sh
+
+
+
+
+
+

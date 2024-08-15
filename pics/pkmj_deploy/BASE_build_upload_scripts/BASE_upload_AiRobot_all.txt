@@ -1,0 +1,39 @@
+option batch on
+option confirm off
+open %1%
+rm /pkmj/airobot_niuniu/upload/*
+rm /pkmj/airobot_dmqq/upload/*
+rm /pkmj/airobot_txhd/upload/*
+rm /pkmj/airobot_tlmn/upload/*
+rm /pkmj/airobot_pkdn/upload/*
+rm /pkmj/airobot_bcmn/upload/*
+rm /pkmj/airobot_ggth/upload/*
+rm /pkmj/airobot_rmin/upload/*
+rm /pkmj/airobot_ddzb/upload/*
+rm /pkmj/airobot_big2/upload/*
+rm /pkmj/airobot_fish/upload/*
+option transfer binary
+put %2%\CommonBase\target\CommonBase-1.0-SNAPSHOT.jar /pkmj/airobot_niuniu/upload/
+put %2%\AiRobot\target\AiRobot-1.0-SNAPSHOT.jar /pkmj/airobot_niuniu/upload/
+put %2%\CommonBase\target\CommonBase-1.0-SNAPSHOT.jar /pkmj/airobot_dmqq/upload/
+put %2%\AiRobot\target\AiRobot-1.0-SNAPSHOT.jar /pkmj/airobot_dmqq/upload/
+put %2%\CommonBase\target\CommonBase-1.0-SNAPSHOT.jar /pkmj/airobot_txhd/upload/
+put %2%\AiRobot\target\AiRobot-1.0-SNAPSHOT.jar /pkmj/airobot_txhd/upload/
+put %2%\CommonBase\target\CommonBase-1.0-SNAPSHOT.jar /pkmj/airobot_tlmn/upload/
+put %2%\AiRobot\target\AiRobot-1.0-SNAPSHOT.jar /pkmj/airobot_tlmn/upload/
+put %2%\CommonBase\target\CommonBase-1.0-SNAPSHOT.jar /pkmj/airobot_pkdn/upload/
+put %2%\AiRobot\target\AiRobot-1.0-SNAPSHOT.jar /pkmj/airobot_pkdn/upload/
+put %2%\CommonBase\target\CommonBase-1.0-SNAPSHOT.jar /pkmj/airobot_bcmn/upload/
+put %2%\AiRobot\target\AiRobot-1.0-SNAPSHOT.jar /pkmj/airobot_bcmn/upload/
+put %2%\CommonBase\target\CommonBase-1.0-SNAPSHOT.jar /pkmj/airobot_ggth/upload/
+put %2%\AiRobot\target\AiRobot-1.0-SNAPSHOT.jar /pkmj/airobot_ggth/upload/
+put %2%\CommonBase\target\CommonBase-1.0-SNAPSHOT.jar /pkmj/airobot_rmin/upload/
+put %2%\AiRobot\target\AiRobot-1.0-SNAPSHOT.jar /pkmj/airobot_rmin/upload/
+put %2%\CommonBase\target\CommonBase-1.0-SNAPSHOT.jar /pkmj/airobot_ddzb/upload/
+put %2%\AiRobot\target\AiRobot-1.0-SNAPSHOT.jar /pkmj/airobot_ddzb/upload/
+put %2%\CommonBase\target\CommonBase-1.0-SNAPSHOT.jar /pkmj/airobot_big2/upload/
+put %2%\AiRobot\target\AiRobot-1.0-SNAPSHOT.jar /pkmj/airobot_big2/upload/
+put %2%\CommonBase\target\CommonBase-1.0-SNAPSHOT.jar /pkmj/airobot_fish/upload/
+put %2%\AiRobot\target\AiRobot-1.0-SNAPSHOT.jar /pkmj/airobot_fish/upload/
+close
+exit

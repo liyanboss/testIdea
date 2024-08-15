@@ -1,0 +1,98 @@
+
+sudo yum list installed | grep tar
+sudo yum list installed | grep curl
+sudo yum list installed | grep telnet
+sudo yum list installed | grep unzip
+sudo yum list installed | grep nginx
+sudo yum list installed | grep java
+sudo yum list installed | grep mysql
+sudo yum list installed | grep mariadb
+
+sudo yum list search telnet
+sudo yum list search unzip
+sudo yum list search nginx
+sudo yum list search mariadb
+
+sudo yum install telnet.x86_64
+sudo yum install unzip.x86_64
+sudo yum install nginx.x86_64
+sudo yum install mariadb.x86_64
+
+
+HttpServer:
+pscp -P 22 -pw PASSWD -r pmjuser01@192.168.77.82:/data/pkmj/httpserver/lib/* D:\PKMJ\Setup\Tools_82_lib_hs
+pscp -P 22 -pw PASSWD -r D:\PKMJ\Setup\Tools_82 pmjuser01@192.168.77.121:/home/pmjuser01/upload/
+pscp -P 22 -pw PASSWD -r D:\PKMJ\Setup\Tools_82_lib_hs pmjuser01@192.168.77.121:/home/pmjuser01/upload/
+pscp -P 22 -pw PASSWD -r D:\PKMJ\ProductPMahjongServer\dbAutomation\pkmj_deploy\new_prod\prod_77_82\pkmj pmjuser01@192.168.77.121:/home/pmjuser01/upload/
+pscp -P 22 -pw PASSWD -r D:\PKMJ\ProductPMahjongServer\dbAutomation\pkmj_deploy\new_prod\prod_77_82\pokermahjong pmjuser01@192.168.77.121:/home/pmjuser01/upload/
+cd /pkmj/tools/
+tar zxvf apache-tomcat-9.0.34.tar.gz
+mv apache-tomcat-9.0.34 apache-tomcat-9.0.34_HttpServer
+ln -sv /pkmj/tools/apache-tomcat-9.0.34_HttpServer /pkmj/apache-tomcat-HttpServer
+pscp -P 22 -pw PASSWD -r pmjuser01@192.168.77.82:/data/pkmj/tools/apache-tomcat-9.0.34_HttpServer/webapps/HttpServer/* D:\PKMJ\Setup\Prod_builds\82_webapps_HttpServer\
+pscp -P 22 -pw PASSWD -r D:\PKMJ\Setup\Prod_builds\82_webapps_HttpServer\* pmjuser01@192.168.77.121:/pkmj/tools/apache-tomcat-9.0.34_HttpServer/webapps/HttpServer/
+
+LobbyServer:
+pscp -P 22 -pw PASSWD -r D:\PKMJ\Setup\Tools_84 pmjuser01@192.168.77.123:/home/pmjuser01/upload/
+pscp -P 22 -pw PASSWD -r D:\PKMJ\ProductPMahjongServer\dbAutomation\pkmj_deploy\new_prod\prod_77_84\pkmj pmjuser01@192.168.77.123:/home/pmjuser01/upload/
+cd /pkmj/tools/
+tar zxvf apache-activemq-5.15.3-bin.tar.gz
+mv apache-activemq-5.15.3 apache-activemq-5.15.3_61616
+ln -sv /pkmj/tools/apache-activemq-5.15.3_61616 /pkmj/activemq_61616/apache-activemq
+tar zxvf apache-activemq-5.15.3-bin.tar.gz
+mv apache-activemq-5.15.3 apache-activemq-5.15.3_61626
+ln -sv /pkmj/tools/apache-activemq-5.15.3_61626 /pkmj/activemq_61626/apache-activemq
+pscp -P 22 -pw PASSWD -r pmjuser01@192.168.77.84:/pkmj/lobbyserver/running/* D:\PKMJ\Setup\Prod_builds\84_lobbyserver_running\
+pscp -P 22 -pw PASSWD -r D:\PKMJ\Setup\Prod_builds\84_lobbyserver_running\* pmjuser01@192.168.77.123:/pkmj/lobbyserver/running/
+
+GameServer:
+pscp -P 22 -pw PASSWD -r D:\PKMJ\Setup\Tools_83 pmjuser01@192.168.77.122:/home/pmjuser01/upload/
+pscp -P 22 -pw PASSWD -r D:\PKMJ\ProductPMahjongServer\dbAutomation\pkmj_deploy\new_prod\prod_77_83\pkmj pmjuser01@192.168.77.122:/home/pmjuser01/upload/
+pscp -P 22 -pw PASSWD -r pmjuser01@192.168.77.83:/pkmj/gameserver/running/* D:\PKMJ\Setup\Prod_builds\83_gameserver_running\
+pscp -P 22 -pw PASSWD -r D:\PKMJ\Setup\Prod_builds\83_gameserver_running\* pmjuser01@192.168.77.122:/pkmj/gameserver/running/
+
+BackOffice:
+pscp -P 22 -pw PASSWD -r pmjuser01@192.168.77.86:/data/pkmj/backoffice/lib/* D:\PKMJ\Setup\Tools_86_lib_bo
+pscp -P 22 -pw PASSWD -r pmjuser01@192.168.77.86:/data/pkmj/newbackoffice/lib/* D:\PKMJ\Setup\Tools_86_lib_nbo
+pscp -P 22 -pw PASSWD -r D:\PKMJ\Setup\Tools_86 pmjuser01@192.168.77.125:/home/pmjuser01/upload/
+pscp -P 22 -pw PASSWD -r D:\PKMJ\Setup\Tools_86_lib_bo pmjuser01@192.168.77.125:/home/pmjuser01/upload/
+pscp -P 22 -pw PASSWD -r D:\PKMJ\Setup\Tools_86_lib_nbo pmjuser01@192.168.77.125:/home/pmjuser01/upload/
+pscp -P 22 -pw PASSWD -r D:\PKMJ\ProductPMahjongServer\dbAutomation\pkmj_deploy\new_prod\prod_77_86\pkmj pmjuser01@192.168.77.125:/home/pmjuser01/upload/
+cd /pkmj/tools/
+tar zxvf apache-tomcat-9.0.34.tar.gz
+mv apache-tomcat-9.0.34 apache-tomcat-9.0.34_BackOffice
+ln -sv /pkmj/tools/apache-tomcat-9.0.34_BackOffice /pkmj/apache-tomcat-BackOffice
+tar zxvf apache-tomcat-9.0.34.tar.gz
+mv apache-tomcat-9.0.34 apache-tomcat-9.0.34_NewBackOffice
+ln -sv /pkmj/tools/apache-tomcat-9.0.34_NewBackOffice /pkmj/apache-tomcat-NewBackOffice
+pscp -P 22 -pw PASSWD -r pmjuser01@192.168.77.86:/data/pkmj/tools/apache-tomcat-9.0.34_BackOffice/webapps/ROOT/* D:\PKMJ\Setup\Prod_builds\86_webapps_BackOffice\
+pscp -P 22 -pw PASSWD -r pmjuser01@192.168.77.86:/data/pkmj/tools/apache-tomcat-9.0.34_NewBackOffice/webapps/ROOT/* D:\PKMJ\Setup\Prod_builds\86_webapps_NewBackOffice\
+pscp -P 22 -pw PASSWD -r D:\PKMJ\Setup\Prod_builds\86_webapps_BackOffice\* pmjuser01@192.168.77.125:/pkmj/tools/apache-tomcat-9.0.34_BackOffice/webapps/ROOT/
+pscp -P 22 -pw PASSWD -r D:\PKMJ\Setup\Prod_builds\86_webapps_NewBackOffice\* pmjuser01@192.168.77.125:/pkmj/tools/apache-tomcat-9.0.34_NewBackOffice/webapps/ROOT/
+
+AiRobot+DC:
+pscp -P 22 -pw PASSWD -r D:\PKMJ\Setup\Tools_85 pmjuser01@192.168.77.124:/home/pmjuser01/upload/
+pscp -P 22 -pw PASSWD -r D:\PKMJ\ProductPMahjongServer\dbAutomation\pkmj_deploy\new_prod\prod_77_85\pkmj pmjuser01@192.168.77.124:/home/pmjuser01/upload/
+pscp -P 22 -pw PASSWD -r pmjuser01@192.168.77.85:/data/pkmj/dataconsolidate/running/* D:\PKMJ\Setup\Prod_builds\85_dataconsolidate_running\
+
+pscp -P 22 -pw PASSWD -r pmjuser01@192.168.77.85:/data/pkmj/airobot_bcmn/running/* D:\PKMJ\Setup\Prod_builds\85_airobot_bcmn_running\
+pscp -P 22 -pw PASSWD -r pmjuser01@192.168.77.85:/data/pkmj/airobot_big2/running/* D:\PKMJ\Setup\Prod_builds\85_airobot_big2_running\
+pscp -P 22 -pw PASSWD -r pmjuser01@192.168.77.85:/data/pkmj/airobot_ddzb/running/* D:\PKMJ\Setup\Prod_builds\85_airobot_ddzb_running\
+pscp -P 22 -pw PASSWD -r pmjuser01@192.168.77.85:/data/pkmj/airobot_dmqq/running/* D:\PKMJ\Setup\Prod_builds\85_airobot_dmqq_running\
+pscp -P 22 -pw PASSWD -r pmjuser01@192.168.77.85:/data/pkmj/airobot_ggth/running/* D:\PKMJ\Setup\Prod_builds\85_airobot_ggth_running\
+pscp -P 22 -pw PASSWD -r pmjuser01@192.168.77.85:/data/pkmj/airobot_niuniu/running/* D:\PKMJ\Setup\Prod_builds\85_airobot_niuniu_running\
+pscp -P 22 -pw PASSWD -r pmjuser01@192.168.77.85:/data/pkmj/airobot_pkdn/running/* D:\PKMJ\Setup\Prod_builds\85_airobot_pkdn_running\
+pscp -P 22 -pw PASSWD -r pmjuser01@192.168.77.85:/data/pkmj/airobot_rmin/running/* D:\PKMJ\Setup\Prod_builds\85_airobot_rmin_running\
+pscp -P 22 -pw PASSWD -r pmjuser01@192.168.77.85:/data/pkmj/airobot_tlmn/running/* D:\PKMJ\Setup\Prod_builds\85_airobot_tlmn_running\
+pscp -P 22 -pw PASSWD -r pmjuser01@192.168.77.85:/data/pkmj/airobot_txhd/running/* D:\PKMJ\Setup\Prod_builds\85_airobot_txhd_running\
+
+
+
+
+
+
+
+
+
+
+
